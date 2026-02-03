@@ -1,24 +1,26 @@
-<!DOCTYPE html>
+퓨       ㅍ ㅠㅍ ㅠ ㅜ<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Recommender</title>
+    <title>Stock Recommender</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Food Recommender</h1>
+        <h1>Stock Recommender</h1>
     </header>
     <main>
-        <div id="food-recommendation-app">
-            <!-- Food recommendation web component will be loaded here -->
-            <food-recommender></food-recommender>
+        <div class="search-container">
+            <input type="text" id="stock-search" placeholder="Enter stock symbol or name...">
+            <button id="get-recommendations">Get Recommendations</button>
+        </div>
+        <div id="stock-recommendations-results">
+            <!-- Stock recommendations will be displayed here -->
         </div>
     </main>
     <footer>
-        <p>&copy; 2026 Food Recommender</p>
+        <p>&copy; 2026 Stock Recommender</p>
     </footer>
     <script type="module" src="main.js"></script>
 </body>
-</html>

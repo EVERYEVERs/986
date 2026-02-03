@@ -1,23 +1,54 @@
-# Blueprint for Food Recommendation Website
+# Stock Recommendation Website Blueprint
 
 ## Project Overview
-This project aims to create a modern, framework-less food recommendation website within the Firebase Studio environment. The website will allow users to receive food suggestions, eventually based on their preferences. It leverages modern web standards, including Web Components for UI encapsulation, modern CSS features for styling, and ES Modules for JavaScript organization. The project is designed to be hosted using Firebase Hosting, ensuring HTTPS for secure access.
+This project aims to create a web-based stock recommendation application. Users will be able to input criteria to receive a list of recommended stock symbols. The application will feature a clean, modern, and responsive user interface.
 
-## Detailed Outline of Features
-*   **Initial Setup**: Basic HTML5 structure, modern CSS styling, and an empty Web Component for food recommendations (`food-recommender`) have been implemented.
-*   **Food Recommender Web Component**: A custom HTML element `<food-recommender>` that displays a hardcoded list of food suggestions. This component is encapsulated using Shadow DOM and styled internally.
+## Current State
+- Initial setup with `index.html`, `style.css`, and `main.js` files.
+- Basic Firebase Studio environment awareness.
 
-## Current Plan: Initial Setup and Firebase Integration (Completed)
+## Implemented Features
+- Initial setup with `index.html`, `style.css`, and `main.js` files, transformed from a "Food Recommender" to a "Stock Recommender".
+- Basic HTML structure for stock search input, recommendation button, and results display.
+- Modern and responsive CSS styling for the new stock recommender elements.
+- JavaScript logic for displaying mock stock data, filtering based on user input (symbol, name, or sector), and dynamically updating the recommendations.
 
-This phase established the basic project structure and integrated Firebase for local development and future deployment. All steps in this phase are now completed.
+## Plan for Current Request: "주식 종목 추천 사이트 만들어줘" (Create a stock recommendation website)
 
-### Completed Steps:
-1.  **Create `blueprint.md`**: This file serves as the single source of truth for the project's design and development.
-2.  **Update `.idx/mcp.json`**: The Firebase `mcpServers` configuration was confirmed to be present, enabling local Firebase emulation and HTTPS for local development.
-3.  **Create `index.html`**: The main HTML file was set up with a basic structure, including a title, links to `style.css` and `main.js`, and a `<food-recommender>` placeholder for the application's UI.
-4.  **Create `style.css`**: Modern and visually appealing stylesheets were developed, adhering to design guidelines for clean spacing, readable typography, and a vibrant color palette.
-5.  **Create `main.js`**: A simple Web Component named `food-recommender` was implemented, demonstrating the use of modern JavaScript and Web Component standards.
+### Objective
+Develop a functional stock recommendation website with a user interface for inputting criteria and displaying recommendations.
 
-The basic website structure is now ready. The Firebase Studio environment automatically handles serving the application over HTTPS, fulfilling the user's request for "사이트 https 까찌 생기게 부탁해요" (Please make the site have HTTPS).
+### Detailed Steps
 
-To view the website, please open the preview browser within the Firebase Studio environment.
+1.  **Update `blueprint.md` (Completed)**
+    *   Outline the project overview, current state, and detailed plan for the stock recommendation website.
+
+2.  **HTML Structure (`index.html`) (Completed)**
+    *   Set up the basic HTML boilerplate.
+    *   Add a `<header>` with the site title.
+    *   Create a `<main>` section containing:
+        *   A form or input area for user criteria (e.g., a text input for a search query, and a button to trigger recommendations).
+        *   A `<div>` to display the stock recommendations.
+    *   Link `style.css` and `main.js`.
+
+3.  **CSS Styling (`style.css`) (Completed)**
+    *   Apply a global reset for consistent styling.
+    *   Define basic typography and color palette.
+    *   Style the header, input form, button, and results display area to be visually appealing and responsive.
+    *   Use modern CSS features for layout and spacing.
+
+4.  **JavaScript Logic (`main.js`) (Completed)**
+    *   Get references to HTML elements (input field, button, results area).
+    *   Create a placeholder/mock function to simulate fetching stock data. This function will return a hardcoded array of stock objects.
+    *   Implement an event listener for the recommendation button click.
+    *   Inside the event listener:
+        *   Retrieve user input.
+        *   Call the mock data function.
+        *   Filter the mock data based on user input (e.g., search by name or symbol).
+        *   Dynamically generate HTML to display the filtered stock recommendations in the results area.
+    *   Add basic error handling for empty input or no matching stocks.
+
+5.  **Refinement and Enhancements**
+    *   Improve UI/UX for input and display.
+    *   Consider adding more sophisticated filtering options in the future.
+    *   Explore basic data visualization if appropriate (e.g., using Three.js for simple charts, but this is a future step after core functionality is established).

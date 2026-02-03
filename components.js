@@ -42,3 +42,16 @@ class StockCard extends HTMLElement {
 customElements.define('stock-recommender-header', StockRecommenderHeader);
 customElements.define('stock-recommender-footer', StockRecommenderFooter);
 customElements.define('stock-card', StockCard);
+
+class CurrencyRateCard extends HTMLElement {
+    set currency(data) {
+        this.innerHTML = `
+            <div class="currency-card">
+                <h3>${data.currency}</h3>
+                <p class="rate">${data.rate.toFixed(4)}</p>
+            </div>
+        `;
+    }
+}
+
+customElements.define('currency-rate-card', CurrencyRateCard);

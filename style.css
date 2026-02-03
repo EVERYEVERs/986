@@ -256,5 +256,97 @@ form button {
 }
 
 form button:hover {
+
     background-color: #003d99;
+
+}
+
+
+
+/* Currency Rates Styles */
+
+.currency-rates-container {
+
+    margin-top: 40px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee;
+
+}
+
+
+
+.currency-rates-container h2 {
+
+    text-align: center;
+
+    color: var(--heading-color);
+
+    margin-bottom: 20px;
+
+}
+
+
+
+#currency-rates-results {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+
+.currency-card {
+
+    background: #fff;
+
+    padding: 20px;
+
+    border-radius: var(--border-radius);
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+    text-align: center;
+
+    transition: var(--transition);
+
+}
+
+
+
+.currency-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+
+}
+
+
+
+.currency-card h3 {
+
+    margin: 0 0 10px 0;
+
+    color: var(--primary-color);
+
+    font-size: 1.2rem;
+
+}
+
+
+
+.currency-card .rate {
+
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    color: var(--text-color);
+
 }

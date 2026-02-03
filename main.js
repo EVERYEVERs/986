@@ -71,4 +71,30 @@ stockSearchInput.addEventListener('input', () => {
 
 // Initial load
 getRecommendations();
+fetchExchangeRates();
+
+async function fetchExchangeRates() {
+    const currencyResultsContainer = document.getElementById('currency-rates-results');
+    currencyResultsContainer.innerHTML = '<p>Loading exchange rates...</p>';
+
+    try {
+        const response = await fetch('https://api.frankfurter.app/latest?from=USD&to=JPY,GBP,CAD,AUD,KRW');
+        if (!response.ok) {
+            throw new Error('Failed to fetch exchange rates.');
+        }
+        const data = await response.json();
+        const rates = data.rates;
+
+        currencyResultsContainer.innerHTML = ''; // Clear loading message
+
+        for (const currency in rates) {
+            const currencyCard = document.createElement('currency-rate-card');
+            currencyCard.currency = { currency: currency, rate: rates[currency] };
+            currencyResultsContainer.appendChild(currencyCard);
+        }
+    } catch (error) {
+        currencyResultsContainer.innerHTML = `<p>Could not load exchange rates. Please try again later.</p>`;
+        console.error(error);
+    }
+}
 

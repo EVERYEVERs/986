@@ -1,1 +1,73 @@
-/* Add styles here */
+:root {
+    --primary-color: #4CAF50; /* A pleasant green */
+    --secondary-color: #FFC107; /* An accent yellow */
+    --background-color: #f4f7f6;
+    --text-color: #333;
+    --footer-bg-color: #333;
+    --footer-text-color: #f4f7f6;
+    --border-radius: 8px;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: var(--shadow);
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    main {
+        flex: 1;
+        padding: 20px;
+        max-width: 960px;
+        margin: 20px auto;
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+    }
+
+    footer {
+        background-color: var(--footer-bg-color);
+        color: var(--footer-text-color);
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 20px;
+    }
+}
+
+/* Responsive design using container queries for future components */
+@container (max-width: 768px) {
+    main {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@container (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}

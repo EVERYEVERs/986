@@ -5,27 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Recommender</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google AdSense Script -->
-
-         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2439651929880164"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2439651929880164"
      crossorigin="anonymous"></script>
-    <!-- End Google AdSense Script -->
 </head>
 <body>
-    <header>
-        <h1>Stock Recommender</h1>
-    </header>
+    <stock-recommender-header></stock-recommender-header>
     <main>
         <div class="search-container">
-            <input type="text" id="stock-search" placeholder="Enter stock symbol or name...">
+            <input type="text" id="stock-search" placeholder="Enter stock symbol, name, or sector...">
             <button id="get-recommendations">Get Recommendations</button>
         </div>
         <div id="stock-recommendations-results">
             <!-- Stock recommendations will be displayed here -->
         </div>
     </main>
-    <footer>
-        <p>&copy; 2026 Stock Recommender</p>
-    </footer>
+    <stock-recommender-footer></stock-recommender-footer>
     <script type="module" src="main.js"></script>
 </body>

@@ -24,18 +24,18 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 *   **Simulated API:** The application currently uses mock stock data and simulates an API call with a delay. This makes it easy to integrate a real API in the future.
 *   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
 *   **Interactive Modals:** 
-    *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked.
+    *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked. This feature now uses a mock data service to ensure content is always available without requiring a live API key.
     *   **Currency Chart Modal:** A "View Chart" button on each currency card opens a modal with a 30-day historical chart for that currency pair (USD base) using Chart.js.
 *   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
 
-## Current Task: Improve Currency Chart UX
+## Current Task: Fix News Service
 
-*   **Objective:** Improve user experience by adding an explicit "View Chart" button to each currency card instead of making the entire card clickable.
+*   **Objective:** Resolve the error message "Please add your News API key in main.js to fetch news" and ensure news content is displayed correctly.
 *   **Steps Completed:**
-    1.  **Updated `translations.js`:** Added a `viewChart` key for "View Chart" / "차트 보기".
-    2.  **Updated `components.js`:** Added a `<button>` with the class `view-chart-btn` to the `currency-rate-card` component.
-    3.  **Modified `main.js`:** Changed the event listener in `fetchExchangeRates` to target only the `.view-chart-btn` button, triggering the chart modal on click.
-    4.  **Updated `blueprint.md`:** Documented the UX improvement for the currency chart feature.
+    1.  **Implemented Mock News:** Created a `mockNews` object in `main.js` to serve as a local, offline database of sample news articles for different stock symbols.
+    2.  **Modified `fetchStockNews`:** Updated the function to fetch news from the `mockNews` object instead of a live API. It now simulates a network delay for a realistic user experience.
+    3.  **Removed API Key:** Deleted the `NEWS_API_KEY` constant as it is no longer needed.
+    4.  **Updated `blueprint.md`:** Documented the implementation of the mock news service.
 
 ## Plan for Future Development
 

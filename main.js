@@ -4,8 +4,43 @@ import { translations } from './translations.js';
 // Make translations available globally
 window.translations = translations;
 
-// --- API Keys ---
-const NEWS_API_KEY = 'YOUR_NEWS_API_KEY';
+// --- Mock Data ---
+const mockNews = {
+    'AAPL': [
+        {
+            title: 'Apple Announces New iPhone with AI Features',
+            source: { name: 'TechCrunch' },
+            publishedAt: '2024-05-10T14:00:00Z',
+            description: 'Apple today unveiled its latest iPhone, which includes a host of new AI-powered capabilities designed to make the device more personal and intuitive.',
+            url: '#'
+        },
+        {
+            title: 'Analysts Bullish on Apple\'s Services Growth',
+            source: { name: 'Bloomberg' },
+            publishedAt: '2024-05-09T18:30:00Z',
+            description: 'Wall Street analysts are increasingly optimistic about the growth trajectory of Apple\'s services division, citing strong performance in the App Store and new subscription offerings.',
+            url: '#'
+        },
+    ],
+    'MSFT': [
+         {
+            title: 'Microsoft Expands its AI Cloud Services',
+            source: { name: 'Reuters' },
+            publishedAt: '2024-05-10T11:00:00Z',
+            description: 'Microsoft announced a significant expansion of its Azure cloud platform with new AI services aimed at enterprise customers.',
+            url: '#'
+        }
+    ],
+    'GOOGL': [
+        {
+            title: 'Google I/O 2024: All the biggest announcements',
+            source: { name: 'The Verge' },
+            publishedAt: '2024-05-14T20:00:00Z',
+            description: 'From AI updates in Search and Android to new hardware, here is everything Google announced at its annual developer conference.',
+            url: '#'
+        }
+    ]
+};
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -142,22 +177,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- News Functions ---
     async function fetchStockNews(stock) {
         const lang = document.documentElement.lang || 'en';
-        if (NEWS_API_KEY === 'YOUR_NEWS_API_KEY') return `<p>${translations[lang].newsApiKeyError}</p>`;
-        try {
-            const res = await fetch(`https://newsapi.org/v2/everything?q=${stock.name}&apiKey=${NEWS_API_KEY}&pageSize=5`);
-            if (!res.ok) throw new Error('Failed to fetch news');
-            const data = await res.json();
-            if (data.articles.length === 0) return `<p>${translations[lang].noRecentNews.replace('{stockName}', stock.name)}</p>`;
-            return data.articles.map(article => `
-                <div class="news-article">
-                    <h4><a href="${article.url}" target="_blank">${article.title}</a></h4>
-                    <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
-                    <p>${article.description || ''}</p>
-                </div>`).join('');
-        } catch (error) {
-            console.error(error);
-            return `<p>${translations[lang].newsFetchError}</p>`;
+        await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+    
+        const newsForStock = mockNews[stock.symbol];
+    
+        if (!newsForStock || newsForStock.length === 0) {
+            return `<p>${translations[lang].noRecentNews} ${stock.name}</p>`;
         }
+    
+        return newsForStock.map(article => `
+            <div class="news-article">
+                <h4><a href="${article.url}" target="_blank" rel="noopener noreferrer">${article.title}</a></h4>
+                <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                <p>${article.description || ''}</p>
+            </div>`).join('');
     }
     
     // --- Currency Chart Functions ---

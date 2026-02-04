@@ -39,7 +39,77 @@ const mockNews = {
             description: 'From AI updates in Search and Android to new hardware, here is everything Google announced at its annual developer conference.',
             url: '#'
         }
-    ]
+    ],
+    'AMZN': [{
+        title: 'Amazon Web Services Announces New AI Tools',
+        source: { name: 'VentureBeat' },
+        publishedAt: '2024-05-13T10:00:00Z',
+        description: 'AWS continues to push the boundaries of cloud computing with a new suite of AI and machine learning tools for developers.',
+        url: '#'
+    }],
+    'NVDA': [{
+        title: 'NVIDIA Stock Soars After Announcing New GPU Architecture',
+        source: { name: 'Yahoo Finance' },
+        publishedAt: '2024-05-12T15:00:00Z',
+        description: 'NVIDIA shares hit an all-time high following the announcement of their next-generation GPU, expected to power future AI and gaming applications.',
+        url: '#'
+    }],
+    'TSLA': [{
+        title: 'Tesla Unveils Plans for New Gigafactory in Europe',
+        source: { name: 'CNBC' },
+        publishedAt: '2024-05-11T09:30:00Z',
+        description: 'CEO Elon Musk announced Tesla\'s ambitious plans to build a new Gigafactory to meet the growing demand for its electric vehicles in the European market.',
+        url: '#'
+    }],
+    'META': [{
+        title: 'Meta\'s Metaverse Ambitions Face New Hurdles',
+        source: { name: 'The Wall Street Journal' },
+        publishedAt: '2024-05-14T11:00:00Z',
+        description: 'Meta Platforms is facing regulatory and technical challenges as it continues to invest billions into building out its vision for the metaverse.',
+        url: '#'
+    }],
+    'BRK-B': [{
+        title: 'Warren Buffett\'s Berkshire Hathaway Releases Quarterly Earnings',
+        source: { name: 'Associated Press' },
+        publishedAt: '2024-05-04T12:00:00Z',
+        description: 'Berkshire Hathaway reported its Q1 earnings, showing strong performance in its insurance and energy sectors.',
+        url: '#'
+    }],
+    'JPM': [{
+        title: 'JPMorgan Chase CEO on the Future of Banking',
+        source: { name: 'Financial Times' },
+        publishedAt: '2024-05-08T16:00:00Z',
+        description: 'Jamie Dimon shares his thoughts on cryptocurrency, digital banking, and the global economic outlook.',
+        url: '#'
+    }],
+    'JNJ': [{
+        title: 'Johnson & Johnson Announces Positive Results from New Drug Trial',
+        source: { name: 'STAT News' },
+        publishedAt: '2024-04-30T10:00:00Z',
+        description: 'The pharmaceutical giant has announced promising results from a late-stage clinical trial for a new cancer treatment.',
+        url: '#'
+    }],
+    'WMT': [{
+        title: 'Walmart Invests Heavily in E-Commerce and Automation',
+        source: { name: 'Forbes' },
+        publishedAt: '2024-05-02T13:45:00Z',
+        description: 'Walmart is doubling down on its investment in technology to compete with Amazon, focusing on supply chain automation and online grocery delivery.',
+        url: '#'
+    }],
+    'PG': [{
+        title: 'P&G Beats Earnings Expectations Amidst Inflation',
+        source: { name: 'MarketWatch' },
+        publishedAt: '2024-04-28T21:00:00Z',
+        description: 'Procter & Gamble reported strong quarterly results, successfully navigating inflationary pressures through price increases and cost-cutting measures.',
+        url: '#'
+    }],
+    'V': [{
+        title: 'Visa Expands Contactless Payment Technology to More Countries',
+        source: { name: 'PYMNTS.com' },
+        publishedAt: '2024-05-07T11:20:00Z',
+        description: 'Visa is working with partners globally to expand access to secure and convenient contactless payment options.',
+        url: '#'
+    }]
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,6 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology', price: 175.00 },
         { symbol: 'MSFT', name: 'Microsoft Corp.', sector: 'Technology', price: 420.00 },
         { symbol: 'GOOGL', name: 'Alphabet Inc.', sector: 'Technology', price: 155.00 },
+        { symbol: 'AMZN', name: 'Amazon.com, Inc.', sector: 'E-Commerce', price: 185.00 },
+        { symbol: 'NVDA', name: 'NVIDIA Corporation', sector: 'Technology', price: 950.00 },
+        { symbol: 'TSLA', name: 'Tesla, Inc.', sector: 'Automotive', price: 177.00 },
+        { symbol: 'META', name: 'Meta Platforms, Inc.', sector: 'Technology', price: 480.00 },
+        { symbol: 'BRK-B', name: 'Berkshire Hathaway Inc.', sector: 'Conglomerate', price: 410.00 },
+        { symbol: 'JPM', name: 'JPMorgan Chase & Co.', sector: 'Financial Services', price: 200.00 },
+        { symbol: 'JNJ', name: 'Johnson & Johnson', sector: 'Healthcare', price: 150.00 },
+        { symbol: 'WMT', name: 'Walmart Inc.', sector: 'Retail', price: 65.00 },
+        { symbol: 'PG', name: 'The Procter & Gamble Company', sector: 'Consumer Goods', price: 165.00 },
+        { symbol: 'V', name: 'Visa Inc.', sector: 'Financial Services', price: 275.00 }
     ];
 
     function displayRecommendations(stocks) {
@@ -106,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         stockRecommendationsResults.innerHTML = `<p>${translations[lang].loading}</p>`;
         await new Promise(resolve => setTimeout(resolve, 500));
         const searchTerm = stockSearchInput.value.toLowerCase().trim();
-        const filteredStocks = !searchTerm ? mockStocks : mockStocks.filter(s =>
-            s.name.toLowerCase().includes(searchTerm) || s.symbol.toLowerCase().includes(searchTerm)
+        const filteredStocks = !searchTerm ? mockStocks.slice(0, 3) : mockStocks.filter(s =>
+            s.name.toLowerCase().includes(searchTerm) || s.symbol.toLowerCase().includes(searchTerm) || s.sector.toLowerCase().includes(searchTerm)
         );
         displayRecommendations(filteredStocks);
     }

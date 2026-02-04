@@ -21,6 +21,7 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 
 ### Technical
 *   **Web Components:** The header, footer, and stock recommendation cards are built as reusable Web Components for better code modularity.
+*   **Expanded Mock Stock Data:** The list of available stocks has been expanded to include 13 major US companies, providing a richer search experience. The initial view defaults to showing 3 stocks.
 *   **Simulated API:** The application currently uses mock stock data and simulates an API call with a delay. This makes it easy to integrate a real API in the future.
 *   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
 *   **Interactive Modals:** 
@@ -28,14 +29,14 @@ This project aims to create a high-quality, modern, and responsive stock recomme
     *   **Currency Chart Modal:** A "View Chart" button on each currency card opens a modal with a 30-day historical chart for that currency pair (USD base) using Chart.js.
 *   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
 
-## Current Task: Fix News Service
+## Current Task: Expand Stock Selection
 
-*   **Objective:** Resolve the error message "Please add your News API key in main.js to fetch news" and ensure news content is displayed correctly.
+*   **Objective:** Increase the number of searchable stocks while keeping the initial page load clean.
 *   **Steps Completed:**
-    1.  **Implemented Mock News:** Created a `mockNews` object in `main.js` to serve as a local, offline database of sample news articles for different stock symbols.
-    2.  **Modified `fetchStockNews`:** Updated the function to fetch news from the `mockNews` object instead of a live API. It now simulates a network delay for a realistic user experience.
-    3.  **Removed API Key:** Deleted the `NEWS_API_KEY` constant as it is no longer needed.
-    4.  **Updated `blueprint.md`:** Documented the implementation of the mock news service.
+    1.  **Expanded `mockStocks`:** Added 10 new major US companies (e.g., Amazon, NVIDIA, Tesla) to the `mockStocks` array in `main.js`.
+    2.  **Expanded `mockNews`:** Added corresponding mock news articles for all new stock symbols to ensure news modals function correctly.
+    3.  **Improved `getRecommendations` Logic:** Modified the function to display the first 3 stocks by default and search the full list of 13 stocks when a user enters a search term.
+    4.  **Updated `blueprint.md`:** Documented the expansion of the mock stock data and the improved search logic.
 
 ## Plan for Future Development
 
@@ -44,7 +45,7 @@ Integrate a real stock data API to provide users with live, accurate stock infor
 
 ### Detailed Steps
 
-1.  **Obtain an API Key:** Get a free API key from a stock data provider like [Alpha Vantage](https://www.alphavantage.co/).
+1.  **Obtain an API Key:** Get a free API key from a stock data provider like [Alpha Vantage](https.www.alphavantage.co/).
 2.  **Integrate the API:**
     *   In `main.js`, replace the `mockStocks` array with a `fetch` call to the Alpha Vantage API.
     *   Parse the JSON response from the API to get the stock data.

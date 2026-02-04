@@ -21,22 +21,21 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 
 ### Technical
 *   **Web Components:** The header, footer, and stock recommendation cards are built as reusable Web Components for better code modularity.
-*   **Expanded Mock Stock Data:** The list of available stocks has been expanded to include 23 major US companies, providing a richer search experience. The initial view defaults to showing 3 stocks.
+*   **Expanded Mock Stock Data:** The list of available stocks has been expanded to include 23 major US companies, providing a richer search experience. The initial view defaults to showing 3 stocks, now labeled with `(ex)` to indicate they are examples.
 *   **Simulated API:** The application currently uses mock stock data and simulates an API call with a delay. This makes it easy to integrate a real API in the future.
 *   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
 *   **Interactive Modals:** 
-    *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked. This feature now uses a mock data service to ensure content is always available without requiring a live API key.
+    *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked. The modal title has been cleaned up to not show the `(ex)` label.
     *   **Currency Chart Modal:** A "View Chart" button on each currency card opens a modal with a 30-day historical chart for that currency pair (USD base) using Chart.js.
 *   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
 
-## Current Task: Expand Stock Selection
+## Current Task: Label Example Stocks
 
-*   **Objective:** Increase the number of searchable stocks while keeping the initial page load clean.
+*   **Objective:** Clearly label the initial three stocks as examples for the user.
 *   **Steps Completed:**
-    1.  **Expanded `mockStocks`:** Added another 10 new major US companies (e.g., UnitedHealth, Home Depot, Mastercard) to the `mockStocks` array in `main.js`, bringing the total to 23.
-    2.  **Expanded `mockNews`:** Added corresponding mock news articles for all new stock symbols to ensure news modals function correctly.
-    3.  **Improved `getRecommendations` Logic:** The function continues to display the first 3 stocks by default and searches the full list of 23 stocks when a user enters a search term.
-    4.  **Updated `blueprint.md`:** Documented the expansion of the mock stock data.
+    1.  **Modified `main.js`:** Updated the `getRecommendations` function to append ` (ex)` to the name of the three initial stocks.
+    2.  **Cleaned Up Modal Title:** Adjusted the `openModal` function to remove the ` (ex)` suffix from the stock name when displaying the news modal title, ensuring a clean user interface.
+    3.  **Updated `blueprint.md`:** Documented the new labeling feature.
 
 ## Plan for Future Development
 

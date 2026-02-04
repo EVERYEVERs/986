@@ -109,6 +109,76 @@ const mockNews = {
         publishedAt: '2024-05-07T11:20:00Z',
         description: 'Visa is working with partners globally to expand access to secure and convenient contactless payment options.',
         url: '#'
+    }],
+    'UNH': [{
+        title: 'UnitedHealth Group Sees Growth in Optum Division', 
+        source: { name: 'Reuters' },
+        publishedAt: '2024-05-15T12:00:00Z',
+        description: 'UnitedHealth Group\'s Optum health services unit continues to be a major driver of growth, with strong performance in its pharmacy benefit management and healthcare delivery services.', 
+        url: '#'
+    }],
+    'HD': [{
+        title: 'Home Depot Reports Rise in Sales Amid Housing Market Strength', 
+        source: { name: 'Bloomberg' },
+        publishedAt: '2024-05-16T11:30:00Z', 
+        description: 'The Home Depot posted better-than-expected quarterly sales, as the home improvement retailer benefited from a robust housing market and increased demand from professional contractors.',
+        url: '#'
+    }],
+    'MA': [{
+        title: 'Mastercard Expands Buy Now, Pay Later Program', 
+        source: { name: 'The Wall Street Journal' },
+        publishedAt: '2024-05-17T09:00:00Z',
+        description: 'Mastercard is expanding its \'buy now, pay later\' service, partnering with more banks and fintech companies to offer flexible payment options to consumers.', 
+        url: '#'
+    }],
+    'BAC': [{
+        title: 'Bank of America CEO Discusses Economic Outlook', 
+        source: { name: 'CNBC' },
+        publishedAt: '2024-05-14T16:20:00Z', 
+        description: 'In a recent interview, Bank of America CEO Brian Moynihan offered his perspective on the current economic climate, inflation, and the future of interest rates.', 
+        url: '#'
+    }],
+    'KO': [{
+        title: 'Coca-Cola Launches New Beverage Line Focused on Health and Wellness',
+        source: { name: 'Forbes' },
+        publishedAt: '2024-05-18T10:15:00Z', 
+        description: 'The Coca-Cola Company is tapping into the growing health and wellness trend with the launch of a new line of organic, low-sugar beverages.',
+        url: '#'
+    }],
+    'PEP': [{
+        title: 'PepsiCo Announces Major Investment in Sustainable Packaging', 
+        source: { name: 'Reuters' },
+        publishedAt: '2024-05-19T14:00:00Z', 
+        description: 'PepsiCo has pledged to significantly increase its use of recycled materials in its packaging and invest in new technologies to reduce its environmental footprint.', 
+        url: '#'
+    }],
+    'DIS': [{
+        title: 'Disney+ Surpasses 200 Million Subscribers', 
+        source: { name: 'The Verge' },
+        publishedAt: '2024-05-20T18:00:00Z',
+        description: 'The Walt Disney Company announced that its streaming service, Disney+, has reached a new milestone, surpassing 200 million subscribers worldwide.',
+        url: '#'
+    }],
+    'CSCO': [{
+        title: 'Cisco Pivots to Software and Services', 
+        source: { name: 'TechCrunch' },
+        publishedAt: '2024-05-21T11:45:00Z', 
+        description: 'Cisco Systems is accelerating its transition from a hardware-centric company to one focused on software and recurring revenue streams from services.', 
+        url: '#'
+    }],
+    'ORCL': [{
+        title: 'Oracle Wins Major Cloud Contract with a Fortune 500 Company', 
+        source: { name: 'VentureBeat' },
+        publishedAt: '2024-05-22T15:30:00Z',
+        description: 'Oracle announced it has secured a multi-year cloud infrastructure contract with a leading company in the retail sector, boosting its position in the competitive cloud market.',
+        url: '#'
+    }],
+    'CRM': [{
+        title: 'Salesforce Unveils New AI-Powered Features for its CRM Platform', 
+        source: { name: 'Yahoo Finance' },
+        publishedAt: '2024-05-23T13:00:00Z', 
+        description: 'Salesforce announced \'Einstein GPT,\' a new set of generative AI features integrated into its Customer 360 platform, aimed at improving sales, marketing, and customer service.', 
+        url: '#'
     }]
 };
 
@@ -161,7 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { symbol: 'JNJ', name: 'Johnson & Johnson', sector: 'Healthcare', price: 150.00 },
         { symbol: 'WMT', name: 'Walmart Inc.', sector: 'Retail', price: 65.00 },
         { symbol: 'PG', name: 'The Procter & Gamble Company', sector: 'Consumer Goods', price: 165.00 },
-        { symbol: 'V', name: 'Visa Inc.', sector: 'Financial Services', price: 275.00 }
+        { symbol: 'V', name: 'Visa Inc.', sector: 'Financial Services', price: 275.00 },
+        { symbol: 'UNH', name: 'UnitedHealth Group Inc.', sector: 'Healthcare', price: 520.00 },
+        { symbol: 'HD', name: 'The Home Depot, Inc.', sector: 'Retail', price: 340.00 },
+        { symbol: 'MA', name: 'Mastercard Incorporated', sector: 'Financial Services', price: 460.00 },
+        { symbol: 'BAC', name: 'Bank of America Corp', sector: 'Financial Services', price: 38.00 },
+        { symbol: 'KO', name: 'The Coca-Cola Company', sector: 'Consumer Goods', price: 63.00 },
+        { symbol: 'PEP', name: 'PepsiCo, Inc.', sector: 'Consumer Goods', price: 180.00 },
+        { symbol: 'DIS', name: 'The Walt Disney Company', sector: 'Entertainment', price: 105.00 },
+        { symbol: 'CSCO', name: 'Cisco Systems, Inc.', sector: 'Technology', price: 48.00 },
+        { symbol: 'ORCL', name: 'Oracle Corporation', sector: 'Technology', price: 125.00 },
+        { symbol: 'CRM', name: 'Salesforce, Inc.', sector: 'Technology', price: 230.00 }
     ];
 
     function displayRecommendations(stocks) {

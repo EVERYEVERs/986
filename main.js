@@ -1,13 +1,12 @@
 import './components.js';
 import { translations } from './translations.js';
 
-// Make translations available globally for web components
+// Make translations available globally
 window.translations = translations;
 
 // --- API Keys ---
 const NEWS_API_KEY = 'YOUR_NEWS_API_KEY';
 
-// Wrap all DOM interaction in DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Element Selections ---
@@ -24,24 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('[data-translate-key]').forEach(element => {
             const key = element.getAttribute('data-translate-key');
-            if (translations[lang] && translations[lang][key]) {
-                if (element.placeholder !== undefined) {
-                    element.placeholder = translations[lang][key];
+            const translation = translations[lang]?.[key] || translations['en'][key];
+            if (translation) {
+                 if (element.placeholder !== undefined) {
+                    element.placeholder = translation;
                 } else {
-                    element.textContent = translations[lang][key];
+                    element.textContent = translation;
                 }
             }
         });
-        // Re-render components that depend on language
         getRecommendations();
         fetchExchangeRates();
     }
 
     function getLanguage() {
         const savedLang = localStorage.getItem('language') || 'en';
-        if (languageSelect) {
-            languageSelect.value = savedLang;
-        }
+        if (languageSelect) languageSelect.value = savedLang;
         setLanguage(savedLang);
     }
 
@@ -50,31 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
         { symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology', price: 175.00 },
         { symbol: 'MSFT', name: 'Microsoft Corp.', sector: 'Technology', price: 420.00 },
         { symbol: 'GOOGL', name: 'Alphabet Inc.', sector: 'Technology', price: 155.00 },
-        { symbol: 'AMZN', name: 'Amazon.com Inc.', sector: 'Consumer Discretionary', price: 180.00 },
-        { symbol: 'NVDA', name: 'NVIDIA Corp.', sector: 'Technology', price: 900.00 },
-        { symbol: 'TSLA', name: 'Tesla Inc.', sector: 'Consumer Discretionary', price: 185.00 },
-        { symbol: 'JPM', name: 'JPMorgan Chase & Co.', sector: 'Financials', price: 195.00 },
-        { symbol: 'V', name: 'Visa Inc.', sector: 'Financials', price: 275.00 },
-        { symbol: 'JNJ', name: 'Johnson & Johnson', sector: 'Healthcare', price: 155.00 },
-        { symbol: 'UNH', name: 'UnitedHealth Group Inc.', sector: 'Healthcare', price: 500.00 },
-        { symbol: 'PG', name: 'Procter & Gamble Co.', sector: 'Consumer Staples', price: 160.00 },
-        { symbol: 'KO', name: 'The Coca-Cola Company', sector: 'Consumer Staples', price: 60.00 }
     ];
 
     function displayRecommendations(stocks) {
         if (!stockRecommendationsResults) return;
-        stockRecommendationsResults.innerHTML = ''; // Clear previous results
         const lang = document.documentElement.lang || 'en';
-
+        stockRecommendationsResults.innerHTML = '';
         if (stocks.length === 0) {
             stockRecommendationsResults.innerHTML = `<p>${translations[lang].noRecommendations}</p>`;
             return;
         }
-
         stocks.forEach(stock => {
             const stockCard = document.createElement('stock-card');
             stockCard.stock = stock;
-            stockCard.addEventListener('click', () => openNewsModal(stock));
+            stockCard.addEventListener('click', () => openModal(stock, 'news'));
             stockRecommendationsResults.appendChild(stockCard);
         });
     }
@@ -83,71 +69,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!stockRecommendationsResults || !stockSearchInput) return;
         const lang = document.documentElement.lang || 'en';
         stockRecommendationsResults.innerHTML = `<p>${translations[lang].loading}</p>`;
-
         await new Promise(resolve => setTimeout(resolve, 500));
-
         const searchTerm = stockSearchInput.value.toLowerCase().trim();
-        let filteredStocks = !searchTerm ? mockStocks : mockStocks.filter(stock =>
-            stock.name.toLowerCase().includes(searchTerm) ||
-            stock.symbol.toLowerCase().includes(searchTerm) ||
-            stock.sector.toLowerCase().includes(searchTerm)
+        const filteredStocks = !searchTerm ? mockStocks : mockStocks.filter(s =>
+            s.name.toLowerCase().includes(searchTerm) || s.symbol.toLowerCase().includes(searchTerm)
         );
         displayRecommendations(filteredStocks);
     }
 
-    // --- News Modal Functions ---
-    async function fetchStockNews(stock) {
-        const lang = document.documentElement.lang || 'en';
-        if (NEWS_API_KEY === 'YOUR_NEWS_API_KEY') {
-            return `<p>${translations[lang].newsApiKeyError}</p>`;
-        }
-        try {
-            const response = await fetch(`https://newsapi.org/v2/everything?q=${stock.name}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}&pageSize=5`);
-            if (!response.ok) throw new Error('Failed to fetch news.');
-            const data = await response.json();
-            if (data.articles.length === 0) return `<p>${stock.name}${translations[lang].noRecentNews}.</p>`;
-            
-            return data.articles.map(article => `
-                <div class="news-article">
-                    <h4><a href="${article.url}" target="_blank">${article.title}</a></h4>
-                    <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
-                    <p>${article.description}</p>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error(error);
-            return `<p>${translations[lang].newsFetchError}</p>`;
-        }
-    }
-
-    function openNewsModal(stock) {
+    // --- Generic Modal Functions ---
+    function openModal(data, type) {
         const lang = document.documentElement.lang || 'en';
         const modalOverlay = document.createElement('div');
         modalOverlay.className = 'modal-overlay';
+        let modalContentHtml = '';
+
+        if (type === 'news') {
+            modalContentHtml = `
+                <h3 data-translate-key="recentNews">${translations[lang].recentNews} ${data.name}</h3>
+                <div class="news-container"><p data-translate-key="loadingNews">${translations[lang].loadingNews}</p></div>
+            `;
+            fetchStockNews(data).then(newsHtml => {
+                const newsContainer = modalOverlay.querySelector('.news-container');
+                if (newsContainer) newsContainer.innerHTML = newsHtml;
+            });
+        } else if (type === 'currency') {
+            const title = translations[lang].currencyChartTitle.replace('{currency}', data.currency);
+            modalContentHtml = `
+                <h3>${title}</h3>
+                <div class="chart-container"><p data-translate-key="loadingChart">${translations[lang].loadingChart}</p></div>
+            `;
+            fetchCurrencyHistory(data.currency).then(history => {
+                const chartContainer = modalOverlay.querySelector('.chart-container');
+                if (chartContainer) {
+                    if (history) {
+                        chartContainer.innerHTML = '<canvas id="currency-chart"></canvas>';
+                        const canvas = chartContainer.querySelector('#currency-chart');
+                        renderCurrencyChart(canvas, history, data.currency);
+                    } else {
+                        chartContainer.innerHTML = `<p data-translate-key="chartError">${translations[lang].chartError}</p>`;
+                    }
+                }
+            });
+        }
+
         modalOverlay.innerHTML = `
             <div class="modal-content">
                 <button class="modal-close">&times;</button>
-                <h3 data-translate-key="recentNews">${translations[lang].recentNews} ${stock.name}</h3>
-                <div class="news-container"><p data-translate-key="loadingNews">${translations[lang].loadingNews}</p></div>
+                ${modalContentHtml}
             </div>
         `;
+
         document.body.appendChild(modalOverlay);
-        
         setTimeout(() => {
             modalOverlay.style.opacity = '1';
             modalOverlay.querySelector('.modal-content').style.transform = 'translateY(0)';
         }, 10);
 
-        modalOverlay.querySelector('.modal-close').addEventListener('click', closeNewsModal);
-        modalOverlay.addEventListener('click', (e) => e.target === modalOverlay && closeNewsModal());
-
-        fetchStockNews(stock).then(newsHtml => {
-            const newsContainer = modalOverlay.querySelector('.news-container');
-            if (newsContainer) newsContainer.innerHTML = newsHtml;
-        });
+        modalOverlay.querySelector('.modal-close').addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => e.target === modalOverlay && closeModal());
     }
 
-    function closeNewsModal() {
+    function closeModal() {
         const modalOverlay = document.querySelector('.modal-overlay');
         if (modalOverlay) {
             modalOverlay.style.opacity = '0';
@@ -156,21 +139,86 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- News Functions ---
+    async function fetchStockNews(stock) {
+        const lang = document.documentElement.lang || 'en';
+        if (NEWS_API_KEY === 'YOUR_NEWS_API_KEY') return `<p>${translations[lang].newsApiKeyError}</p>`;
+        try {
+            const res = await fetch(`https://newsapi.org/v2/everything?q=${stock.name}&apiKey=${NEWS_API_KEY}&pageSize=5`);
+            if (!res.ok) throw new Error('Failed to fetch news');
+            const data = await res.json();
+            if (data.articles.length === 0) return `<p>${translations[lang].noRecentNews.replace('{stockName}', stock.name)}</p>`;
+            return data.articles.map(article => `
+                <div class="news-article">
+                    <h4><a href="${article.url}" target="_blank">${article.title}</a></h4>
+                    <p>${article.source.name} - ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                    <p>${article.description || ''}</p>
+                </div>`).join('');
+        } catch (error) {
+            console.error(error);
+            return `<p>${translations[lang].newsFetchError}</p>`;
+        }
+    }
+    
+    // --- Currency Chart Functions ---
+    async function fetchCurrencyHistory(currency) {
+        const endDate = new Date().toISOString().split('T')[0];
+        const startDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        try {
+            const res = await fetch(`https://api.frankfurter.app/${startDate}..${endDate}?from=USD&to=${currency}`);
+            if (!res.ok) throw new Error('Failed to fetch currency history');
+            const data = await res.json();
+            return data.rates;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
+    function renderCurrencyChart(canvas, historyData, currency) {
+        const dates = Object.keys(historyData).sort();
+        const rates = dates.map(date => historyData[date][currency]);
+
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: `USD to ${currency}`,
+                    data: rates,
+                    borderColor: '#4A90E2',
+                    backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: false }
+                },
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+    }
+
     // --- Exchange Rate Functions ---
     async function fetchExchangeRates() {
         if (!currencyResultsContainer) return;
         const lang = document.documentElement.lang || 'en';
         currencyResultsContainer.innerHTML = `<p>${translations[lang].loadingExchangeRates}</p>`;
-
         try {
-            const response = await fetch('https://api.frankfurter.app/latest?from=USD&to=JPY,GBP,CAD,AUD,KRW');
-            if (!response.ok) throw new Error('Failed to fetch exchange rates.');
-            const data = await response.json();
-
+            const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=JPY,GBP,CAD,AUD,KRW');
+            if (!res.ok) throw new Error('Failed to fetch exchange rates');
+            const data = await res.json();
             currencyResultsContainer.innerHTML = '';
             for (const currency in data.rates) {
                 const currencyCard = document.createElement('currency-rate-card');
                 currencyCard.currency = { currency: currency, rate: data.rates[currency] };
+                currencyCard.addEventListener('click', () => openModal({ currency: currency }, 'currency'));
                 currencyResultsContainer.appendChild(currencyCard);
             }
         } catch (error) {
@@ -180,16 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Event Listeners and Initial Load ---
-    if (languageSelect) {
-        languageSelect.addEventListener('change', (e) => setLanguage(e.target.value));
-    }
-    if (getRecommendationsButton) {
-        getRecommendationsButton.addEventListener('click', getRecommendations);
-    }
-    if (stockSearchInput) {
-        stockSearchInput.addEventListener('input', getRecommendations);
-    }
+    if (languageSelect) languageSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+    if (getRecommendationsButton) getRecommendationsButton.addEventListener('click', getRecommendations);
+    if (stockSearchInput) stockSearchInput.addEventListener('input', getRecommendations);
 
-    // Initial Load Functions
     getLanguage();
 });

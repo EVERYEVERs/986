@@ -23,23 +23,23 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 *   **Web Components:** The header, footer, and stock recommendation cards are built as reusable Web Components for better code modularity.
 *   **Simulated API:** The application currently uses mock stock data and simulates an API call with a delay. This makes it easy to integrate a real API in the future.
 *   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
-*   **Interactive News Modal:** News articles are displayed in an interactive modal when a stock card is clicked.
+*   **Interactive Modals:** 
+    *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked.
+    *   **Currency Chart Modal:** Clicking on a currency exchange rate card now opens a modal displaying a 30-day historical chart for that currency pair (USD base) using Chart.js.
 *   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
 
-## Current Task: Add Korean Translation
+## Current Task: Add Interactive Currency Chart
 
-*   **Objective:** Integrate a Korean language option into the website.
+*   **Objective:** Allow users to view historical exchange rate data by clicking on a currency card.
 *   **Steps Completed:**
-    1.  **Created `translations.js`:** A new file was created to store both English and Korean text strings for the UI.
-    2.  **Updated `components.js`:** 
-        *   Added a language selector dropdown to the header component.
-        *   Added `data-translate-key` attributes to elements in the header and stock card components to mark them for translation.
-    3.  **Modified `main.js`:**
-        *   Imported the `translations` object.
-        *   Implemented `setLanguage` and `getLanguage` functions to handle language switching and persistence using `localStorage`.
-        *   Updated functions (`displayRecommendations`, `openNewsModal`, etc.) to use the translated strings.
-    4.  **Updated `index.html`:** Added `data-translate-key` attributes to relevant HTML elements for translation.
-    5.  **Updated `blueprint.md`:** Documented the implementation of the new Korean translation feature.
+    1.  **Added Chart.js:** Included the Chart.js library via CDN in `index.html`.
+    2.  **Updated `translations.js`:** Added new text strings for the chart modal title and loading/error states.
+    3.  **Enhanced `main.js`:**
+        *   Created a generic `openModal` function to handle both news and currency chart modals.
+        *   Implemented `fetchCurrencyHistory` to get the last 30 days of exchange rate data from the Frankfurter API.
+        *   Implemented `renderCurrencyChart` to draw a line chart using the fetched data and Chart.js.
+        *   Added a click event listener to each currency card to trigger the chart modal.
+    4.  **Updated `blueprint.md`:** Documented the new interactive currency chart feature.
 
 ## Plan for Future Development
 

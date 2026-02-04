@@ -25,21 +25,17 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 *   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
 *   **Interactive Modals:** 
     *   **News Modal:** News articles are displayed in an interactive modal when a stock card is clicked.
-    *   **Currency Chart Modal:** Clicking on a currency exchange rate card now opens a modal displaying a 30-day historical chart for that currency pair (USD base) using Chart.js.
+    *   **Currency Chart Modal:** A "View Chart" button on each currency card opens a modal with a 30-day historical chart for that currency pair (USD base) using Chart.js.
 *   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
 
-## Current Task: Add Interactive Currency Chart
+## Current Task: Improve Currency Chart UX
 
-*   **Objective:** Allow users to view historical exchange rate data by clicking on a currency card.
+*   **Objective:** Improve user experience by adding an explicit "View Chart" button to each currency card instead of making the entire card clickable.
 *   **Steps Completed:**
-    1.  **Added Chart.js:** Included the Chart.js library via CDN in `index.html`.
-    2.  **Updated `translations.js`:** Added new text strings for the chart modal title and loading/error states.
-    3.  **Enhanced `main.js`:**
-        *   Created a generic `openModal` function to handle both news and currency chart modals.
-        *   Implemented `fetchCurrencyHistory` to get the last 30 days of exchange rate data from the Frankfurter API.
-        *   Implemented `renderCurrencyChart` to draw a line chart using the fetched data and Chart.js.
-        *   Added a click event listener to each currency card to trigger the chart modal.
-    4.  **Updated `blueprint.md`:** Documented the new interactive currency chart feature.
+    1.  **Updated `translations.js`:** Added a `viewChart` key for "View Chart" / "차트 보기".
+    2.  **Updated `components.js`:** Added a `<button>` with the class `view-chart-btn` to the `currency-rate-card` component.
+    3.  **Modified `main.js`:** Changed the event listener in `fetchExchangeRates` to target only the `.view-chart-btn` button, triggering the chart modal on click.
+    4.  **Updated `blueprint.md`:** Documented the UX improvement for the currency chart feature.
 
 ## Plan for Future Development
 

@@ -55,10 +55,14 @@ customElements.define('stock-card', StockCard);
 
 class CurrencyRateCard extends HTMLElement {
     set currency(data) {
+        const lang = document.documentElement.lang || 'en';
+        const viewChartText = window.translations[lang].viewChart;
+
         this.innerHTML = `
             <div class="currency-card">
                 <h3>${data.currency}</h3>
                 <p class="rate">${data.rate.toFixed(4)}</p>
+                <button class="view-chart-btn" data-currency="${data.currency}" data-translate-key="viewChart">${viewChartText}</button>
             </div>
         `;
     }

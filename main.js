@@ -218,9 +218,17 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const currency in data.rates) {
                 const currencyCard = document.createElement('currency-rate-card');
                 currencyCard.currency = { currency: currency, rate: data.rates[currency] };
-                currencyCard.addEventListener('click', () => openModal({ currency: currency }, 'currency'));
                 currencyResultsContainer.appendChild(currencyCard);
             }
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.view-chart-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const currency = e.target.dataset.currency;
+                    openModal({ currency: currency }, 'currency');
+                });
+            });
+
         } catch (error) {
             currencyResultsContainer.innerHTML = `<p>${translations[lang].errorExchangeRates}</p>`;
             console.error(error);

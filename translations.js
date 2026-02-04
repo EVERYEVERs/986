@@ -41,10 +41,10 @@ export const translations = {
         blogPostMeta1: 'Published on April 26, 2024 by Admin',
         blogPostExcerpt1: 'Market volatility is a measure of the fluctuation in a stock\'s price over time. Understanding it is key to managing risk...',
         blogReadMore: 'Read More',
-        // Currency Chart Modal
         currencyChartTitle: 'USD to {currency} Exchange Rate (Last 30 Days)',
         loadingChart: 'Loading chart data...',
         chartError: 'Could not load chart data. Please try again later.',
+        viewChart: 'View Chart',
     },
     ko: {
         // ... (existing translations)
@@ -88,9 +88,9 @@ export const translations = {
         blogPostMeta1: '2024년 4월 26일, 관리자 작성',
         blogPostExcerpt1: '시장 변동성은 시간 경과에 따른 주가 변동을 측정한 것입니다. 위험 관리에 있어 이를 이해하는 것이 중요합니다...',
         blogReadMore: '더 읽어보기',
-        // Currency Chart Modal
         currencyChartTitle: 'USD 대 {currency} 환율 (최근 30일)',
         loadingChart: '차트 데이터를 불러오는 중...',
         chartError: '차트 데이터를 불러올 수 없습니다. 나중에 다시 시도해주세요.',
+        viewChart: '차트 보기',
     }
 };

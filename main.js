@@ -266,9 +266,21 @@ document.addEventListener('DOMContentLoaded', () => {
         stockRecommendationsResults.innerHTML = `<p>${translations[lang].loading}</p>`;
         await new Promise(resolve => setTimeout(resolve, 500));
         const searchTerm = stockSearchInput.value.toLowerCase().trim();
-        const filteredStocks = !searchTerm ? mockStocks.slice(0, 3) : mockStocks.filter(s =>
-            s.name.toLowerCase().includes(searchTerm) || s.symbol.toLowerCase().includes(searchTerm) || s.sector.toLowerCase().includes(searchTerm)
-        );
+
+        let filteredStocks;
+        if (!searchTerm) {
+            filteredStocks = mockStocks.slice(0, 3).map(stock => ({
+                ...stock,
+                name: `${stock.name} (ex)`
+            }));
+        } else {
+            filteredStocks = mockStocks.filter(s =>
+                s.name.toLowerCase().includes(searchTerm) ||
+                s.symbol.toLowerCase().includes(searchTerm) ||
+                s.sector.toLowerCase().includes(searchTerm)
+            );
+        }
+
         displayRecommendations(filteredStocks);
     }
 

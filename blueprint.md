@@ -17,10 +17,29 @@ This project aims to create a high-quality, modern, and responsive stock recomme
 *   **Responsive Design:** The website is fully responsive and works on all devices.
 *   **Improved UX:** The website features a live search functionality and a loading indicator for a better user experience.
 *   **Visual Polish:** The design includes gradients, box shadows, and subtle animations to create a polished and "lifted" look.
+*   **Enhanced News Section:** Improved the visual design of the news cards and blog page with better layouts, typography, and visual hierarchy for a more professional and engaging appearance.
 
 ### Technical
 *   **Web Components:** The header, footer, and stock recommendation cards are built as reusable Web Components for better code modularity.
 *   **Simulated API:** The application currently uses mock stock data and simulates an API call with a delay. This makes it easy to integrate a real API in the future.
+*   **Mock News Service:** Resolved a "Could not load news" error by replacing the live API call with a robust mock news data service in `main.js`. This ensures the news feature is always functional for demonstration and gracefully handles potential API key issues.
+*   **Interactive News Modal:** News articles are displayed in an interactive modal when a stock card is clicked.
+*   **Multilingual Support:** Implemented a translation system allowing users to switch between **English and Korean**. The user's language preference is saved in `localStorage` for a persistent experience.
+
+## Current Task: Add Korean Translation
+
+*   **Objective:** Integrate a Korean language option into the website.
+*   **Steps Completed:**
+    1.  **Created `translations.js`:** A new file was created to store both English and Korean text strings for the UI.
+    2.  **Updated `components.js`:** 
+        *   Added a language selector dropdown to the header component.
+        *   Added `data-translate-key` attributes to elements in the header and stock card components to mark them for translation.
+    3.  **Modified `main.js`:**
+        *   Imported the `translations` object.
+        *   Implemented `setLanguage` and `getLanguage` functions to handle language switching and persistence using `localStorage`.
+        *   Updated functions (`displayRecommendations`, `openNewsModal`, etc.) to use the translated strings.
+    4.  **Updated `index.html`:** Added `data-translate-key` attributes to relevant HTML elements for translation.
+    5.  **Updated `blueprint.md`:** Documented the implementation of the new Korean translation feature.
 
 ## Plan for Future Development
 

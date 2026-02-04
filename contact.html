@@ -9,19 +9,23 @@
 <body>
     <stock-recommender-header></stock-recommender-header>
     <main>
-        <h2>Contact Us</h2>
-        <p>If you have any questions, please feel free to contact us.</p>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <button type="submit">Send</button>
-        </form>
+        <div class="content-section">
+            <h2 data-translate-key="contactTitle" style="text-align: center; font-size: 2.5rem; margin-bottom: 30px;">Contact Us</h2>
+            <form style="max-width: 600px; margin: 0 auto;">
+                <label for="name" data-translate-key="contactName">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email" data-translate-key="contactEmail">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message" data-translate-key="contactMessage">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <button type="submit" data-translate-key="contactSend">Send Message</button>
+            </form>
+        </div>
     </main>
     <stock-recommender-footer></stock-recommender-footer>
-    <script type="module" src="components.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>

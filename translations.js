@@ -1,0 +1,105 @@
+
+export const translations = {
+    en: {
+        // Header
+        home: 'Home',
+        about: 'About',
+        contact: 'Contact',
+        disclaimer: 'Disclaimer',
+        blog: 'Blog',
+        // Page Titles
+        pageTitle: 'Stock Recommender',
+        aboutTitle: 'About Us',
+        contactTitle: 'Contact Us',
+        disclaimerTitle: 'Disclaimer',
+        blogTitle: 'Blog',
+        // Index Page
+        headerTitle: 'Stock Recommender',
+        usdExchangeRates: 'USD Exchange Rates',
+        searchPlaceholder: 'Enter stock symbol, name, or sector...',
+        getRecommendations: 'Get Recommendations',
+        noRecommendations: 'No recommendations found based on your criteria.',
+        loading: 'Loading...',
+        loadingExchangeRates: 'Loading exchange rates...',
+        errorExchangeRates: 'Could not load exchange rates. Please try again later.',
+        // Stock Card
+        sector: 'Sector',
+        currentPrice: 'Current Price',
+        // News Modal
+        recentNews: 'Recent News for',
+        loadingNews: 'Loading news...',
+        noRecentNews: 'No recent news found for',
+        newsApiKeyError: 'Please add your News API key in main.js to fetch news.',
+        newsFetchError: 'Could not load news. Please try again later.',
+        // About Page
+        aboutHeading: 'About Stock Recommender',
+        aboutText: 'This platform is designed to provide stock recommendations and market insights. Our goal is to empower users with data-driven information to make informed investment decisions. Please note that all data is for informational purposes only.',
+        // Contact Page
+        contactHeading: 'Get in Touch',
+        contactText: 'Have questions or feedback? Fill out the form below to send us a message.',
+        contactName: 'Name',
+        contactEmail: 'Email',
+        contactMessage: 'Message',
+        contactSend: 'Send Message',
+        // Disclaimer Page
+        disclaimerHeading: 'Disclaimer',
+        disclaimerText: 'The information provided by Stock Recommender is for general informational purposes only. All information on the site is provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the site. Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the site or reliance on any information provided on the site.',
+        // Blog Page
+        blogHeading: 'Market Insights Blog',
+        blogPostTitle1: 'Understanding Market Volatility',
+        blogPostMeta1: 'Published on April 26, 2024 by Admin',
+        blogPostExcerpt1: 'Market volatility is a measure of the fluctuation in a stock\'s price over time. Understanding it is key to managing risk...',
+        blogReadMore: 'Read More',
+    },
+    ko: {
+        // Header
+        home: '홈',
+        about: '소개',
+        contact: '문의하기',
+        disclaimer: '면책조항',
+        blog: '블로그',
+        // Page Titles
+        pageTitle: '주식 추천 서비스',
+        aboutTitle: '서비스 소개',
+        contactTitle: '문의하기',
+        disclaimerTitle: '면책조항',
+        blogTitle: '블로그',
+        // Index Page
+        headerTitle: '주식 추천 서비스',
+        usdExchangeRates: 'USD 환율 정보',
+        searchPlaceholder: '주식 종목, 이름, 또는 섹터 입력...',
+        getRecommendations: '추천 받기',
+        noRecommendations: '조건에 맞는 추천 종목을 찾을 수 없습니다.',
+        loading: '로딩 중...',
+        loadingExchangeRates: '환율 정보를 불러오는 중...',
+        errorExchangeRates: '환율 정보를 불러올 수 없습니다. 나중에 다시 시도해주세요.',
+        // Stock Card
+        sector: '섹터',
+        currentPrice: '현재가',
+        // News Modal
+        recentNews: '최신 뉴스',
+        loadingNews: '뉴스를 불러오는 중...',
+        noRecentNews: '에 대한 최신 뉴스가 없습니다',
+        newsApiKeyError: '뉴스를 가져오려면 main.js에 News API 키를 추가하세요.',
+        newsFetchError: '뉴스를 불러올 수 없습니다. 나중에 다시 시도해주세요.',
+        // About Page
+        aboutHeading: '주식 추천 서비스 소개',
+        aboutText: '이 플랫폼은 주식 추천과 시장 정보를 제공하기 위해 만들어졌습니다. 저희의 목표는 사용자가 데이터 기반의 정보로 현명한 투자 결정을 내릴 수 있도록 돕는 것입니다. 모든 데이터는 정보 제공 목적으로만 사용됩니다.',
+        // Contact Page
+        contactHeading: '문의하기',
+        contactText: '질문이나 피드백이 있으신가요? 아래 양식을 작성하여 메시지를 보내주세요.',
+        contactName: '이름',
+        contactEmail: '이메일',
+        contactMessage: '메시지',
+        contactSend: '메시지 보내기',
+        // Disclaimer Page
+        disclaimerHeading: '면책조항',
+        disclaimerText: '주식 추천 서비스에서 제공되는 정보는 일반적인 정보 제공 목적으로만 사용됩니다. 사이트의 모든 정보는 선의로 제공되지만, 사이트의 정보의 정확성, 타당성, 신뢰성, 가용성 또는 완전성에 대해 명시적이든 묵시적이든 어떠한 종류의 진술이나 보증도 하지 않습니다. 어떠한 경우에도 당사는 사이트 사용 또는 사이트에서 제공된 정보에 대한 의존의 결과로 발생한 모든 종류의 손실이나 손해에 대해 귀하에게 책임을 지지 않습니다.',
+        // Blog Page
+        blogHeading: '시장 분석 블로그',
+        blogPostTitle1: '시장 변동성 이해하기',
+        blogPostMeta1: '2024년 4월 26일, 관리자 작성',
+        blogPostExcerpt1: '시장 변동성은 시간 경과에 따른 주가 변동을 측정한 것입니다. 위험 관리에 있어 이를 이해하는 것이 중요합니다...',
+        blogReadMore: '더 읽어보기',
+    }
+};

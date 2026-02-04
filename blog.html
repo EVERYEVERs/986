@@ -9,19 +9,15 @@
 <body>
     <stock-recommender-header></stock-recommender-header>
     <main>
-        <h2>Blog</h2>
-        <article>
-            <h3>The Future of AI in Stock Trading</h3>
-            <p>Posted on: January 15, 2026</p>
-            <p>Artificial Intelligence is revolutionizing the stock market. From predictive analysis to automated trading, AI is changing the way we invest...</p>
-        </article>
-        <article>
-            <h3>Top 5 Tech Stocks to Watch in 2026</h3>
-            <p>Posted on: January 10, 2026</p>
-            <p>The technology sector continues to be a driver of growth in the stock market. Here are the top 5 tech stocks we are watching this year...</p>
-        </article>
+        <div class="content-section">
+            <h2 data-translate-key="newsTitle" style="text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Latest Financial News</h2>
+            <p data-translate-key="newsSubTitle" style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px;">Stay informed with the latest updates from the financial world.</p>
+            <div id="news-articles-container">
+                <p>Loading news...</p>
+            </div>
+        </div>
     </main>
     <stock-recommender-footer></stock-recommender-footer>
-    <script type="module" src="components.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
